@@ -82,6 +82,20 @@ function searchByName(people){
     }
   })
   // TODO: find the person single person object using the name they entered.
+
+function findDecendants(person, people){
+  let listChildren = [];
+  letfoundDecendant = people.filter(function(potentialMatch)){
+    if(potentialMatch.parents.includes(person.id)){
+      return true;
+    }else{
+      return false;
+    }
+  }
+}
+for( let i = 0; i <foundDecendant.length; i++){
+  listChildren.push('' + foundDecendant[i].firstName + '' + foundDecendant[i].lastName)
+}
   return foundPerson;
 }
 
