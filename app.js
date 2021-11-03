@@ -121,7 +121,13 @@ function findGrandchildren(people, person, originalPerson){
       listGrandChildren.push('' + foundGrandChildren[b]. firstName + '' + foundGrandChildren[b].lastName)
     }
   }
-
+if(listGrandChildren.length === 0){
+  alert('we couldnt find your grandchildren')
+  mainMenu(originalPerson, people)
+}else{
+  alert('${listOfGrandChildren} are the grandchildren')
+  reutnr mainMenu(originalPerson, people)
+}
 
 }
    return foundPerson;
