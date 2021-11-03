@@ -116,8 +116,11 @@ function findGrandchildren(people, person, originalPerson){
       }else{
         return false;
       }
+    })
+    for(let b = 0; n< foundGrandChildren.length; b++){
+      listGrandChildren.push('' + foundGrandChildren[b]. firstName + '' + foundGrandChildren[b].lastName)
     }
-  
+  }
 
 
 }
