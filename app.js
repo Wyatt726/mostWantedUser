@@ -41,13 +41,13 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
       // this will pass a single person in and the function will display all the info about the individual to the user with an alert or prompt
-    displayPersons(person,people);
+    displayPerson(person,people);
     break;
     case "family":
     findParents(person,people)
     break;
     case "descendants":
-    findDecendants(perosn, people)
+    findDecendants(person, people)
     break;
     case "restart":
     app(people); // restart
@@ -88,7 +88,7 @@ function searchByName(people){
 
 function findDecendants(person, people){
   let listChildren = [];
-  letfoundDecendant = people.filter(function(potentialMatch){
+  let foundDecendant = people.filter(function(potentialMatch){
     if(potentialMatch.parents.includes(person.id)){
       return true;
   }else{
@@ -115,7 +115,8 @@ function findGrandchildren(people, person, originalPerson){
     let foundGrandChildren = people.filter(function(potentialMatch){
       if(potentialMatch.parents.includes(person[i].id)){
         return true;
-      }else{
+      }
+      else {
         return false;
       }
     })
@@ -126,16 +127,18 @@ function findGrandchildren(people, person, originalPerson){
 if(listGrandChildren.length === 0){
   alert('we couldnt find your grandchildren')
   mainMenu(originalPerson, people)
-}else{
+}
+  else {
   alert('${listOfGrandChildren} are the grandchildren')
   return mainMenu(originalPerson, people)
 }
-function findParents (person, people){
+function findParents(person, people){
   let listOfParents = [];
   let foundParents = people.filter(function(potentialMatch){
     if (potentialMatch.id === person.parents[0] || potentialMatch.id === personalbar.parents[1]) {
       return true;
-    }else {
+    }
+    else {
       return false;
     }
   })
@@ -146,13 +149,19 @@ for (let i = 0; i < foundParents.length; i++){
 if (listOfParents.length === 0){
   alert('There was no parents found in your search')
   return findSiblings(people, foundParents, person)
-}else{
+}
+else{
   alert('${listOfParents} found as their parents')
   return findSiblings(people, foundParents, person)
+    }
+  }
 }
-}
-}
-   
+
+//removing curly brace line 145, and bracket from 144, then placing curly brace in 159 activates
+//listOfParents and foundParents but sets an error on for loop line 146. Why? Let's fix tomorrow.
+//as these are showing undefined. Tried to troubleshoot -Michael GT
+
+  
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people){
