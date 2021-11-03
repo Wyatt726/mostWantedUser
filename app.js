@@ -15,7 +15,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
+      searchResults = searchbyMultipleTraits(people)
       break;
       default:
     app(people); // restart app
@@ -40,13 +40,13 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
+    displayPersons(person,people);
     break;
     case "family":
-    // TODO: get person's family
+    findParents(person,people)
     break;
     case "descendants":
-    // TODO: get person's descendants
+    findDecendants(perosn, people)
     break;
     case "restart":
     app(people); // restart
@@ -68,7 +68,10 @@ function mainMenu(person, people){
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", autoValid);
+  fistName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
   let lastName = promptFor("What is the person's last name?", autoValid);
+  lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1);
+
 
   let foundPerson = people.filter(function(potentialMatch){
     if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
