@@ -40,6 +40,7 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
+      // this will pass a single person in and the function will display all the info about the individual to the user with an alert or prompt
     displayPersons(person,people);
     break;
     case "family":
@@ -68,7 +69,7 @@ function mainMenu(person, people){
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", autoValid);
-  fistName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+  firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
   let lastName = promptFor("What is the person's last name?", autoValid);
   lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1);
 
@@ -81,6 +82,7 @@ function searchByName(people){
       return false;
     }
   })
+  return foundPerson[0]
 }
   // TODO: find the person single person object using the name they entered.
 
@@ -126,12 +128,31 @@ if(listGrandChildren.length === 0){
   mainMenu(originalPerson, people)
 }else{
   alert('${listOfGrandChildren} are the grandchildren')
-  reutnr mainMenu(originalPerson, people)
+  return mainMenu(originalPerson, people)
 }
-
+function findParents (person, people){
+  let listOfParents = [];
+  let foundParents = people.filter(function(potentialMatch){
+    if (potentialMatch.id === person.parents[0] || potentialMatch.id === personalbar.parents[1]) {
+      return true;
+    }else {
+      return false;
+    }
+  })
 }
-   return foundPerson;
+for (let i = 0; i < foundParents.length; i++){
+  listOfParents.push('' + foundParents[i].firstName + '' + foundParents[i].lastName)
 }
+if (listOfParents.length === 0){
+  alert('There was no parents found in your search')
+  return findSiblings(people, foundParents, person)
+}else{
+  alert('${listOfParents} found as their parents')
+  return findSiblings(people, foundParents, person)
+}
+}
+}
+   
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people){
