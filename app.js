@@ -81,22 +81,47 @@ function searchByName(people){
       return false;
     }
   })
+}
   // TODO: find the person single person object using the name they entered.
 
 function findDecendants(person, people){
   let listChildren = [];
-  letfoundDecendant = people.filter(function(potentialMatch)){
+  letfoundDecendant = people.filter(function(potentialMatch){
     if(potentialMatch.parents.includes(person.id)){
       return true;
-    }else{
+  }else{
       return false;
     }
-  }
-}
+})
+
 for( let i = 0; i <foundDecendant.length; i++){
   listChildren.push('' + foundDecendant[i].firstName + '' + foundDecendant[i].lastName)
 }
-  return foundPerson;
+if(listChildren.length === 0){
+  alert('no decendants found on search')
+  mainMenu(person, people);
+}
+else
+{
+  alert('${listChildren}) is their decendant')
+  return findGrandchildren(people, foundDecendant, person)
+}
+
+function findGrandchildren(people, person, originalPerson){
+  let listGrandChildren = []
+  for (let i = 0; i < person.length; i++){
+    let foundGrandChildren = people.filter(function(potentialMatch){
+      if(potentialMatch.parents.includes(person[i].id)){
+        return true;
+      }else{
+        return false;
+      }
+    }
+  
+
+
+}
+   return foundPerson;
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
