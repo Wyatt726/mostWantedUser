@@ -297,6 +297,42 @@ function occupationSearch(people){
   alert(`${listOfOccupations} are ${userOccupationInput}s`,autoValid);
     return foundOccupation;
 }
+
+function heightSearch(people){
+  let userHeightInput = promptFor('Please enter the persons height in inches',autoValid);
+  let listOfHeights = []
+  let foundHeight = people.filter(function(potentialTraitMatch){
+    if(potentialTraitMatch.height == userHeightInput){
+      return true;
+    }else{
+      return false;
+    }
+  })
+  for(let i = 0; i < foundHeight.length; i ++){
+    listOfHeights.push('' + foundHeight[i].firstName + '' + foundHeight[i].lastName)
+  }
+  alert('${listOfHeights} are ${userHeightInput} inches tall',autoValid);
+    return foundHeight;
+}
+
+
+function weightSearch(people){
+  let userWeightInput = promptFor('Please enter the persons weight', autoValid);
+  let listOfWeight = []
+  let foundWeight = people.filter(function(potentialTraitMatch){
+    if(potentialTraitMatch.weight == userWeightInput){
+      return true;
+    }else{
+      return false;
+    }
+  })
+  for(let i = 0; i < foundWeight.length; i++){
+    listOfWeight.push('' + foundWeight[i].firstName + '' + foundWeight[i].lastName)
+  }
+  alert(`${listOfWeights} are ${userWeightInput} pounds`,autoValid);
+    return foundWeight;
+}
+
 //TODO: add other trait filter functions here.
 
 
