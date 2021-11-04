@@ -232,14 +232,36 @@ function displayPeople(people){
   }).join("\n"));
 }
 
-
-
-
+function displayPerson(person, people){
+  let personInfo = "FirstName:" + person.firstName + "\n";
+  personInfo += "LastName: " + person.lastName + "\n";
+  personInfo += "Gender: " + person.gender + "\n";
+  personInfo += "Date Of Birth: " + person.dob + "\n";
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Eye Color: " + person.eyeColor + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n"
+  alert(personInfo);
+  return mainMenu(person,people)
+}
 
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people){
-
+  let userEyeColorInput = promptFor('Please enter the persons eye color',autoValid);
+  let listOfEyes = []
+  let foundEyeColor = people.filter(function(potentialMatch){
+    if(potentialTraitMatch.eyeColor === userEyeColorInput){
+      return true;
+    }else{
+      return false;
+    }
+  })
+  for(let i = 0; i < foundEyeColor.length; i++){
+    listOfEyes.push('' + foundEyeColor[i].firstName + '' + foundEyeColor[i].lastName)
+  }
+    alert('${listOfEyes} all have ${userEyeColorInput} eyes',autoValid);
+    return foundEyeColor;
 }
 
 //TODO: add other trait filter functions here.
@@ -283,15 +305,15 @@ function displayPerson(person){
 //isValid: Will capture the return of the validation function callback. true(the user input is valid)/false(the user input was not valid).
 //this function will continue to loop until the user enters something that is not an empty string("") or is considered valid based off the callback function(valid).
 function promptFor(question, valid){
+  let response;
   let isValid;
   do{
-    var response = prompt(question).trim();
+    response = prompt(question).trim();
     isValid = valid(response);
   } while(response === ""  ||  isValid === false)
-  return response;
+  return response
 }
 
-// helper function/callback to pass into promptFor to validate yes/no answers.
 function yesNo(input){
   if(input.toLowerCase() == "yes" || input.toLowerCase() == "no"){
     return true;
@@ -301,16 +323,14 @@ function yesNo(input){
   }
 }
 
-// helper function to pass in as default promptFor validation.
-//this will always return true for all inputs.
 function autoValid(input){
-  return true; // default validation only
+  return true; 
 }
 
-//Unfinished validation function you can use for any of your custom validation callbacks.
-//can be used for things like eye color validation for example.
-function customValidation(input){
-  
+function customValidation(input, people){
+  if (input !== people.eyeColor || input !== people.gender || input !== people.weight || input !== people.height || input !== people.dob || input !== people.occupation){
+    return false
+  }
 }
 
 //#endregion
