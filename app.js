@@ -263,7 +263,23 @@ function searchByEyeColor(people){
     alert('${listOfEyes} all have ${userEyeColorInput} eyes',autoValid);
     return foundEyeColor;
 }
-
+function genderSearch(people){
+  let userGenderInput = promptFor('Please enter the persons gender. "male" or "female"',autoValid);
+  let listOfGenders =[]
+  let foundGender = people.filter(function(potentialTraitMatch){
+    if(potentialTraitMatch.gender === userGenderInput){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  for(let i = 0; i < foundGender.length; i++){
+      listOfGenders.push(' ' + foundGender[i].firstName + ' ' + foundGender[i].lastName)
+  }
+  alert(`${listOfGenders} are all ${userGenderInput}`,autoValid);
+    return foundGender;
+}
 //TODO: add other trait filter functions here.
 
 
