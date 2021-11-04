@@ -225,25 +225,6 @@ function findSpouse (person, people) {
     return mainMenu(person, people)
   }
 }
-// alerts a list of people
-function displayPeople(people){
-  alert(people.map(function(person){
-    return person.firstName + " " + person.lastName;
-  }).join("\n"));
-}
-
-function displayPerson(person, people){
-  let personInfo = "FirstName:" + person.firstName + "\n";
-  personInfo += "LastName: " + person.lastName + "\n";
-  personInfo += "Gender: " + person.gender + "\n";
-  personInfo += "Date Of Birth: " + person.dob + "\n";
-  personInfo += "Height: " + person.height + "\n";
-  personInfo += "Weight: " + person.weight + "\n";
-  personInfo += "Eye Color: " + person.eyeColor + "\n";
-  personInfo += "Occupation: " + person.occupation + "\n"
-  alert(personInfo);
-  return mainMenu(person,people)
-}
 
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
@@ -333,6 +314,21 @@ function weightSearch(people){
     return foundWeight;
 }
 
+function dobSearch(people){
+  let userDobInput = promptFor('Please enter the persons date of birth using M/DD/YYYY format (Dont put a zero if it is a single digit month',autoValid);
+  let listOfDob =[]
+  let foundDob = people.filter(function(potentialTraitMatch){
+    if(potentialTraitMatch.dob == userDobInput){
+      return true;
+    }else{
+      return false;
+    }
+  })
+  for(let i = 0; i <foundDob.length; i++){
+    listOfDob.push('' + foundDob[i].firstName + '' + foundDob[i].lastName)
+  }
+  alert('${listOfDob} have the date of birth of ${userDobInput}.',autoValid)
+}
 //TODO: add other trait filter functions here.
 
 
@@ -344,6 +340,7 @@ function weightSearch(people){
 /////////////////////////////////////////////////////////////////
 //#region 
 
+
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
@@ -351,13 +348,17 @@ function displayPeople(people){
   }).join("\n"));
 }
 
-function displayPerson(person){
-  // print all of the information about a person:
-  // height, weight, age, name, occupation, eye color.
-  let personInfo = "First Name: " + person.firstName + "\n";
-  personInfo += "Last Name: " + person.lastName + "\n";
-  // TODO: finish getting the rest of the information to display.
+function displayPerson(person, people){
+  let personInfo = "FirstName:" + person.firstName + "\n";
+  personInfo += "LastName: " + person.lastName + "\n";
+  personInfo += "Gender: " + person.gender + "\n";
+  personInfo += "Date Of Birth: " + person.dob + "\n";
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Eye Color: " + person.eyeColor + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n"
   alert(personInfo);
+  return mainMenu(person,people)
 }
 
 //#endregion
