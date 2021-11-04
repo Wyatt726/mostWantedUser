@@ -155,13 +155,14 @@ else{
   return findSiblings(people, foundParents, person)
     }
   }
-}
+
+
 
 //removing curly brace line 145, and bracket from 144, then placing curly brace in 159 activates
 //listOfParents and foundParents but sets an error on for loop line 146. Why? Let's fix tomorrow.
 //as these are showing undefined. Tried to troubleshoot -Michael GT
 
-  
+
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people){
