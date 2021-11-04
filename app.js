@@ -155,12 +155,89 @@ else{
   return findSiblings(people, foundParents, person)
     }
   }
+}
+function findsiblings(people, foundParents, originalPerson) {
+  let listOfSiblings = [];
+  if (foundParents.length === 0){
+    let foundSiblings = people.filter(function(potentialMatch){
+      if (potentialMatch.Lastname === originalPerson.lastName && potentialMatch.parents[0] === undefined && potentialMatch.currentSpouse !== originalPersonal.id){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    )}
+    for (let i = 0; i < foundSiblings.length; i++){
+      if (foundSiblings[i].id !== originaklPerson.id){
+        listOfSiblings.push('' + foundSiblings[i].firstName + '' + foundSiblings[i].lastName)
+      }
+    }
+}
+if (foundParents.length === 1){
+  let foundSiblings = people.filter(function(potentialMatch){
+    if (potentialMatch.parents[0] === foundParents[0].id || potentialMatch.parents[1] === foundParents[0].id){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  )}
+  for (let i = 0; i < foundSiblings.length; i++) {
+    if (foundSiblings[i].id !== orignalPerson.id) {
+    listOfSiblings.push(' ' + foundSiblings[i].firstName + ' ' + foundSiblings[i].lastName)
+    }
+  }
+
+if (foundParents.length === 2) {
+let foundSiblings = people.filter(function(potentialMatch) {
+  if (potentialMatch.parents[0] === foundParents[0].id || potentialMatch.parents[0] === foundParents[1].id || potentialMatch.parents[1] === foundParents[0].id || potentialMatch.parents[1] === foundParents[1].id) {
+    return true;
+  } else {
+    return false;
+  }
+})
+for (let i = 0; i < foundSiblings.length; i++){
+  if (foundSiblings[i].id !== originalPerson.id){
+    listOfSiblings.push('' + foundSiblings[i].firstName + '' + foundSiblings[i].lastName)
+  }
+}
+if (listOfSiblings.length === 0) {
+  alert('There was no siblings found for your person')
+  return findSpouse(orignalPerson, people)
+} else {
+  alert(`${listOfSiblings} are their siblings`)
+  return findSpouse(orignalPerson, people, )
+}
+}
+
+function findSpouse (person, people) {
+let foundSpouse = people.filter(function(potentialMatch){
+  if (potentialMatch.currentSpouse === person.id) {
+    return true;
+  } else {
+    return false;
+  }
+})
+if (foundSpouse[0] == null || foundSpouse === undefined) {
+  alert('They have no spouse')
+  return mainMenu(person, people)
+} else {
+  alert (foundSpouse[0].firstName + ' ' + foundSpouse[0].lastName + ' is their spouse')
+  return mainMenu(person, people)
+}
+}
+
+// alerts a list of people
+function displayPeople(people){
+  alert(people.map(function(person){
+    return person.firstName + " " + person.lastName;
+  }).join("\n"));
+}
 
 
 
-//removing curly brace line 145, and bracket from 144, then placing curly brace in 159 activates
-//listOfParents and foundParents but sets an error on for loop line 146. Why? Let's fix tomorrow.
-//as these are showing undefined. Tried to troubleshoot -Michael GT
 
 
 
