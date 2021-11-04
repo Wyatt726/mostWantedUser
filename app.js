@@ -77,7 +77,7 @@ function searchByName(people){
     if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
       return true;
     }
-    else{
+      else{
       return false;
     }
   })
@@ -86,7 +86,8 @@ function searchByName(people){
 
   if(foundPerson.length == 0){
     return false
-  }else{
+  }
+    else{
     return mainMenu(foundPerson[0],people);
   }
 
@@ -97,7 +98,8 @@ function findDecendants(person,people){
   let foundDecendant = people.filter(function(potentialMatch){
     if(potentialMatch.parents.includes(person.id)){
       return true;
-    }else{
+    }
+      else{
       return false;
     }
   })
@@ -107,9 +109,10 @@ function findDecendants(person,people){
   if(listOfKids.length === 0){
     alert('There was no descendants found for your person')
     mainMenu(person,people);
-  }else{
-  alert(`${listOfKids} found as their descendant`)
-  return findGrandkids(people,foundDecendant,person)
+  }
+    else{
+    alert(`${listOfKids} found as their descendant`)
+    return findGrandkids(people,foundDecendant,person)
   }
 }
 function findGrandkids(people,person,originalPerson){
@@ -118,7 +121,8 @@ function findGrandkids(people,person,originalPerson){
     let foundGrandKids = people.filter(function(potentialMatch){
       if(potentialMatch.parents.includes(person[i].id)){
         return true;
-      }else{
+      }
+        else{
         return false;
       }
     })
@@ -129,7 +133,8 @@ function findGrandkids(people,person,originalPerson){
   if(listOfGrandkids.length === 0){
     alert('No grandkids were found')
     mainMenu(originalPerson,people)
-  }else{
+  }
+    else{
     alert(`${listOfGrandkids} found as their grandkids`)
     return mainMenu(originalPerson,people)
   }
@@ -139,7 +144,8 @@ function findParents (person,people) {
   let foundParents = people.filter(function(potentialMatch){
     if (potentialMatch.id === person.parents[0] || potentialMatch.id === person.parents[1]) {
       return true;
-    } else {
+    } 
+      else {
       return false;
     }
   })
@@ -149,7 +155,8 @@ function findParents (person,people) {
   if (listOfParents.length === 0) {
     alert('There was no parents found for your person')
     return findSiblings(people, foundParents, person)
-  } else {
+  } 
+    else {
     alert (`${listOfParents} found as their parents`)
     return findSiblings(people, foundParents, person)
   }
@@ -161,7 +168,8 @@ function findSiblings (people, foundParents, orignalPerson) {
     let foundSiblings = people.filter(function(potentialMatch) {
       if (potentialMatch.lastName === orignalPerson.lastName && potentialMatch.parents[0] === undefined && potentialMatch.currentSpouse !== orignalPerson.id) {
         return true;
-      } else {
+      } 
+        else {
         return false;
       }
     })
@@ -175,7 +183,8 @@ function findSiblings (people, foundParents, orignalPerson) {
     let foundSiblings = people.filter(function(potentialMatch){
       if (potentialMatch.parents[0] === foundParents[0].id || potentialMatch.parents[1] === foundParents[0].id) {
         return true;
-      } else {
+      } 
+        else {
         return false;
       }
     })
@@ -189,7 +198,8 @@ function findSiblings (people, foundParents, orignalPerson) {
   let foundSiblings = people.filter(function(potentialMatch) {
     if (potentialMatch.parents[0] === foundParents[0].id || potentialMatch.parents[0] === foundParents[1].id || potentialMatch.parents[1] === foundParents[0].id || potentialMatch.parents[1] === foundParents[1].id) {
       return true;
-    } else {
+    } 
+      else {
       return false;
     }
   })
@@ -203,7 +213,8 @@ function findSiblings (people, foundParents, orignalPerson) {
   if (listOfSiblings.length === 0) {
     alert('There was no siblings found for your person')
     return findSpouse(orignalPerson, people)
-  } else {
+  } 
+    else {
     alert(`${listOfSiblings} are their siblings`)
     return findSpouse(orignalPerson, people, )
   }
@@ -220,7 +231,8 @@ function findSpouse (person, people) {
   if (foundSpouse[0] == null || foundSpouse === undefined) {
     alert('They have no spouse')
     return mainMenu(person, people)
-  } else {
+  } 
+    else {
     alert (foundSpouse[0].firstName + ' ' + foundSpouse[0].lastName + ' is their spouse')
     return mainMenu(person, people)
   }
@@ -285,7 +297,8 @@ function heightSearch(people){
   let foundHeight = people.filter(function(potentialTraitMatch){
     if(potentialTraitMatch.height == userHeightInput){
       return true;
-    }else{
+    }
+    else{
       return false;
     }
   })
@@ -303,7 +316,8 @@ function weightSearch(people){
   let foundWeight = people.filter(function(potentialTraitMatch){
     if(potentialTraitMatch.weight == userWeightInput){
       return true;
-    }else{
+    }
+    else{
       return false;
     }
   })
@@ -320,7 +334,8 @@ function dobSearch(people){
   let foundDob = people.filter(function(potentialTraitMatch){
     if(potentialTraitMatch.dob == userDobInput){
       return true;
-    }else{
+    }
+    else{
       return false;
     }
   })
@@ -380,7 +395,8 @@ function promptFor(question, valid){
   do{
     response = prompt(question).trim();
     isValid = valid(response);
-  } while(response === ""  ||  isValid === false)
+  } 
+  while(response === ""  ||  isValid === false)
   return response
 }
 
