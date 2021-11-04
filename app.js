@@ -156,10 +156,40 @@ else{
     }
   }
 }
+function findsiblings(people, foundParents, originalPerson) {
+  let listOfSiblings = [];
+  if (foundParents.length === 0){
+    let foundSiblings = people.filter(function(potentialMatch){
+      if (potentialMatch.Lastname === originalPerson.lastName && potentialMatch.parents[0] === undefined && potentialMatch.currentSpouse !== originalPersonal.id){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    )}
+    for (let i = 0; i < foundSiblings.length; i++){
+      if (foundSiblings[i].id !== originaklPerson.id){
+        listOfSiblings.push('' + foundSiblings[i].firstName + '' + foundSiblings[i].lastName)
+      }
+    }
+}
+if (foundParents.length === 1){
+  let foundSiblings = people.filter(function(potentialMatch){
+    if (potentialMatch.parents[0] === foundParents[0].id || potentialMatch.parents[1] === foundParents[0].id){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  )}
+}
 
-//removing curly brace line 145, and bracket from 144, then placing curly brace in 159 activates
-//listOfParents and foundParents but sets an error on for loop line 146. Why? Let's fix tomorrow.
-//as these are showing undefined. Tried to troubleshoot -Michael GT
+
+
+
+
 
   
 
