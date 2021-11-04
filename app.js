@@ -73,7 +73,6 @@ function searchByName(people){
   let lastName = promptFor("What is the person's last name?", autoValid);
   lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1);
 
-
   let foundPerson = people.filter(function(potentialMatch){
     if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
       return true;
@@ -82,153 +81,150 @@ function searchByName(people){
       return false;
     }
   })
-  return foundPerson[0]
-}
   // TODO: find the person single person object using the name they entered.
 
-function findDecendants(person, people){
-  let listChildren = [];
+
+  if(foundPerson.length == 0){
+    return false
+  }else{
+    return mainMenu(foundPerson[0],people);
+  }
+
+
+}
+function findDecendants(person,people){
+  let listOfKids = [];
   let foundDecendant = people.filter(function(potentialMatch){
     if(potentialMatch.parents.includes(person.id)){
       return true;
-  }else{
-      return false;
-    }
-})
-
-for( let i = 0; i <foundDecendant.length; i++){
-  listChildren.push('' + foundDecendant[i].firstName + '' + foundDecendant[i].lastName)
-}
-if(listChildren.length === 0){
-  alert('no decendants found on search')
-  mainMenu(person, people);
-}
-else
-{
-  alert('${listChildren}) is their decendant')
-  return findGrandchildren(people, foundDecendant, person)
-}
-
-function findGrandchildren(people, person, originalPerson){
-  let listGrandChildren = []
-  for (let i = 0; i < person.length; i++){
-    let foundGrandChildren = people.filter(function(potentialMatch){
-      if(potentialMatch.parents.includes(person[i].id)){
-        return true;
-      }
-      else {
-        return false;
-      }
-    })
-    for(let b = 0; n< foundGrandChildren.length; b++){
-      listGrandChildren.push('' + foundGrandChildren[b]. firstName + '' + foundGrandChildren[b].lastName)
-    }
-  }
-if(listGrandChildren.length === 0){
-  alert('we couldnt find your grandchildren')
-  mainMenu(originalPerson, people)
-}
-  else {
-  alert('${listOfGrandChildren} are the grandchildren')
-  return mainMenu(originalPerson, people)
-}
-function findParents(person, people){
-  let listOfParents = [];
-  let foundParents = people.filter(function(potentialMatch){
-    if (potentialMatch.id === person.parents[0] || potentialMatch.id === personalbar.parents[1]) {
-      return true;
-    }
-    else {
+    }else{
       return false;
     }
   })
-}
-for (let i = 0; i < foundParents.length; i++){
-  listOfParents.push('' + foundParents[i].firstName + '' + foundParents[i].lastName)
-}
-if (listOfParents.length === 0){
-  alert('There was no parents found in your search')
-  return findSiblings(people, foundParents, person)
-}
-else{
-  alert('${listOfParents} found as their parents')
-  return findSiblings(people, foundParents, person)
-    }
+  for(let i = 0; i < foundDecendant.length; i++){
+    listOfKids.push(' ' + foundDecendant[i].firstName + ' ' + foundDecendant[i].lastName)
+  }
+  if(listOfKids.length === 0){
+    alert('There was no descendants found for your person')
+    mainMenu(person,people);
+  }else{
+  alert(`${listOfKids} found as their descendant`)
+  return findGrandkids(people,foundDecendant,person)
   }
 }
-function findsiblings(people, foundParents, originalPerson) {
-  let listOfSiblings = [];
-  if (foundParents.length === 0){
-    let foundSiblings = people.filter(function(potentialMatch){
-      if (potentialMatch.Lastname === originalPerson.lastName && potentialMatch.parents[0] === undefined && potentialMatch.currentSpouse !== originalPersonal.id){
+function findGrandkids(people,person,originalPerson){
+  let listOfGrandkids = []
+  for(let i = 0; i < person.length; i++){
+    let foundGrandKids = people.filter(function(potentialMatch){
+      if(potentialMatch.parents.includes(person[i].id)){
         return true;
-      }
-      else{
+      }else{
         return false;
       }
-    }
-    )}
-    for (let i = 0; i < foundSiblings.length; i++){
-      if (foundSiblings[i].id !== originaklPerson.id){
-        listOfSiblings.push('' + foundSiblings[i].firstName + '' + foundSiblings[i].lastName)
-      }
-    }
-}
-if (foundParents.length === 1){
-  let foundSiblings = people.filter(function(potentialMatch){
-    if (potentialMatch.parents[0] === foundParents[0].id || potentialMatch.parents[1] === foundParents[0].id){
-      return true;
-    }
-    else{
-      return false;
+    })
+    for(let j = 0; j < foundGrandKids.length; j++){
+      listOfGrandkids.push(' ' + foundGrandKids[j].firstName + ' ' + foundGrandKids[j].lastName)
     }
   }
-  )}
+  if(listOfGrandkids.length === 0){
+    alert('No grandkids were found')
+    mainMenu(originalPerson,people)
+  }else{
+    alert(`${listOfGrandkids} found as their grandkids`)
+    return mainMenu(originalPerson,people)
+  }
+}
+function findParents (person,people) {
+  let listOfParents = [];
+  let foundParents = people.filter(function(potentialMatch){
+    if (potentialMatch.id === person.parents[0] || potentialMatch.id === person.parents[1]) {
+      return true;
+    } else {
+      return false;
+    }
+  })
+  for (let i = 0; i < foundParents.length; i++) {
+    listOfParents.push(' ' + foundParents[i].firstName + ' ' + foundParents[i].lastName)
+  }
+  if (listOfParents.length === 0) {
+    alert('There was no parents found for your person')
+    return findSiblings(people, foundParents, person)
+  } else {
+    alert (`${listOfParents} found as their parents`)
+    return findSiblings(people, foundParents, person)
+  }
+}
+
+function findSiblings (people, foundParents, orignalPerson) {
+  let listOfSiblings = [];
+  if (foundParents.length === 0) {
+    let foundSiblings = people.filter(function(potentialMatch) {
+      if (potentialMatch.lastName === orignalPerson.lastName && potentialMatch.parents[0] === undefined && potentialMatch.currentSpouse !== orignalPerson.id) {
+        return true;
+      } else {
+        return false;
+      }
+    })
+    for (let i = 0; i < foundSiblings.length; i++) {
+      if (foundSiblings[i].id !== orignalPerson.id) {
+      listOfSiblings.push(' ' + foundSiblings[i].firstName + ' ' + foundSiblings[i].lastName)
+      }
+    }
+  }
+  if (foundParents.length === 1) {
+    let foundSiblings = people.filter(function(potentialMatch){
+      if (potentialMatch.parents[0] === foundParents[0].id || potentialMatch.parents[1] === foundParents[0].id) {
+        return true;
+      } else {
+        return false;
+      }
+    })
+    for (let i = 0; i < foundSiblings.length; i++) {
+      if (foundSiblings[i].id !== orignalPerson.id) {
+      listOfSiblings.push(' ' + foundSiblings[i].firstName + ' ' + foundSiblings[i].lastName)
+      }
+    }
+  } 
+  if (foundParents.length === 2) {
+  let foundSiblings = people.filter(function(potentialMatch) {
+    if (potentialMatch.parents[0] === foundParents[0].id || potentialMatch.parents[0] === foundParents[1].id || potentialMatch.parents[1] === foundParents[0].id || potentialMatch.parents[1] === foundParents[1].id) {
+      return true;
+    } else {
+      return false;
+    }
+  })
   for (let i = 0; i < foundSiblings.length; i++) {
     if (foundSiblings[i].id !== orignalPerson.id) {
     listOfSiblings.push(' ' + foundSiblings[i].firstName + ' ' + foundSiblings[i].lastName)
     }
   }
-
-if (foundParents.length === 2) {
-let foundSiblings = people.filter(function(potentialMatch) {
-  if (potentialMatch.parents[0] === foundParents[0].id || potentialMatch.parents[0] === foundParents[1].id || potentialMatch.parents[1] === foundParents[0].id || potentialMatch.parents[1] === foundParents[1].id) {
-    return true;
+}
+  
+  if (listOfSiblings.length === 0) {
+    alert('There was no siblings found for your person')
+    return findSpouse(orignalPerson, people)
   } else {
-    return false;
+    alert(`${listOfSiblings} are their siblings`)
+    return findSpouse(orignalPerson, people, )
   }
-})
-for (let i = 0; i < foundSiblings.length; i++){
-  if (foundSiblings[i].id !== originalPerson.id){
-    listOfSiblings.push('' + foundSiblings[i].firstName + '' + foundSiblings[i].lastName)
-  }
-}
-if (listOfSiblings.length === 0) {
-  alert('There was no siblings found for your person')
-  return findSpouse(orignalPerson, people)
-} else {
-  alert(`${listOfSiblings} are their siblings`)
-  return findSpouse(orignalPerson, people, )
-}
 }
 
 function findSpouse (person, people) {
-let foundSpouse = people.filter(function(potentialMatch){
-  if (potentialMatch.currentSpouse === person.id) {
-    return true;
+  let foundSpouse = people.filter(function(potentialMatch){
+    if (potentialMatch.currentSpouse === person.id) {
+      return true;
+    } else {
+      return false;
+    }
+  })
+  if (foundSpouse[0] == null || foundSpouse === undefined) {
+    alert('They have no spouse')
+    return mainMenu(person, people)
   } else {
-    return false;
+    alert (foundSpouse[0].firstName + ' ' + foundSpouse[0].lastName + ' is their spouse')
+    return mainMenu(person, people)
   }
-})
-if (foundSpouse[0] == null || foundSpouse === undefined) {
-  alert('They have no spouse')
-  return mainMenu(person, people)
-} else {
-  alert (foundSpouse[0].firstName + ' ' + foundSpouse[0].lastName + ' is their spouse')
-  return mainMenu(person, people)
 }
-}
-
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
