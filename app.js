@@ -280,6 +280,23 @@ function genderSearch(people){
   alert(`${listOfGenders} are all ${userGenderInput}`,autoValid);
     return foundGender;
 }
+function occupationSearch(people){
+  let userOccupationInput = promptFor('Please enter the persons occupation',autoValid);
+  let listOfOccupations =[]
+  let foundOccupation = people.filter(function(potentialTraitMatch){
+    if(potentialTraitMatch.occupation === userOccupationInput){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  for(let i = 0; i < foundOccupation.length; i++){
+      listOfOccupations.push(' ' + foundOccupation[i].firstName + ' ' + foundOccupation[i].lastName)
+  }
+  alert(`${listOfOccupations} are ${userOccupationInput}s`,autoValid);
+    return foundOccupation;
+}
 //TODO: add other trait filter functions here.
 
 
