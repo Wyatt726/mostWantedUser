@@ -324,7 +324,7 @@ function weightSearch(people){
   for(let i = 0; i < foundWeight.length; i++){
     listOfWeight.push('' + foundWeight[i].firstName + '' + foundWeight[i].lastName)
   }
-  alert(`${listOfWeights} are ${userWeightInput} pounds`,autoValid);
+  alert(`${listOfWeight} are ${userWeightInput} pounds`,autoValid);
     return foundWeight;
 }
 
@@ -345,6 +345,30 @@ function dobSearch(people){
   alert('${listOfDob} have the date of birth of ${userDobInput}.',autoValid)
 }
 //TODO: add other trait filter functions here.
+//adding in multi critea search
+function searchbyMultipleTraits(people){
+  let listOfTraits = people;
+  let userTrue = false;
+  let finalResult = [];
+  while(userTrue === false){
+    let userTraitInput = parseInt(promptFor('Please enter another trait to search by; Type "1" for eye color, "2" for gender search, "3" occupation, "4" Height search, "5" for weight, or "6" for dob search, if youre search is complete type "7"', autoValid));
+    if(userTraitInput === 1){
+      listOfTraits = searchByEyeColor(listOfTraits)}
+    if(userTraitInput === 2){
+      listOfTraits = genderSearch(listOfTraits);}
+    if(userTraitInput === 3){
+      listOfTraits = occupationSearch(listOfTraits);}
+    if(userTraitInput === 4){
+      listOfTraits = heightSearch(listOfTraits);}
+    if(userTraitInput === 5){
+      listOfTraits = weightSearch(listOfTraits);}
+    if(userTraitInput === 6){
+      listOfTraits = dobSearch(listOfTraits);}
+    if (userTraitInput === 7){
+      userTrue = true;}
+    }
+ 
+
 
 
 
