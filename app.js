@@ -367,6 +367,14 @@ function searchbyMultipleTraits(people){
     if (userTraitInput === 7){
       userTrue = true;}
     }
+  }
+  if (finalResult.length = 0){
+    alert ('No one was fuond given your current search. Please try another search')
+    searchbyMultipleTraits(people)
+  }
+  for (let i = 0; i < listOfTraits.length; i++){
+    finalResult.push('' + listOfTraits[i].firstName + '' + listOfTraits[i].lastName)
+  }
  
 
 
