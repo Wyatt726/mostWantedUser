@@ -15,7 +15,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      searchResults = searchbyMultipleTraits(people)
+      searchResults = searchByTraits(people)
       break;
       default:
     app(people); // restart app
@@ -241,151 +241,149 @@ function findSpouse (person, people) {
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people){
-  let userEyeColorInput = promptFor('Please enter the persons eye color',autoValid);
-  let listOfEyes = []
-  let foundEyeColor = people.filter(function(potentialMatch){
-    if(potentialTraitMatch.eyeColor === userEyeColorInput){
-      return true;
-    }else{
-      return false;
-    }
-  })
-  for(let i = 0; i < foundEyeColor.length; i++){
-    listOfEyes.push('' + foundEyeColor[i].firstName + '' + foundEyeColor[i].lastName)
-  }
-    alert('${listOfEyes} all have ${userEyeColorInput} eyes',autoValid);
-    return foundEyeColor;
-}
-function genderSearch(people){
-  let userGenderInput = promptFor('Please enter the persons gender. "male" or "female"',autoValid);
-  let listOfGenders =[]
-  let foundGender = people.filter(function(potentialTraitMatch){
-    if(potentialTraitMatch.gender === userGenderInput){
+  let eyeColor = promptFor("What is the person's eye color?", autoValid);
+  let foundPerson;
+
+  let foundEyeColor = people.filter(function(potentialMatch) {
+    if(potentialMatch.eyeColor === eyeColor){
       return true;
     }
     else{
       return false;
     }
   })
-  for(let i = 0; i < foundGender.length; i++){
-      listOfGenders.push(' ' + foundGender[i].firstName + ' ' + foundGender[i].lastName)
-  }
-  alert(`${listOfGenders} are all ${userGenderInput}`,autoValid);
-    return foundGender;
+  foundPerson = customValidation(foundEyeColor);
+  return foundPerson;
 }
-function occupationSearch(people){
-  let userOccupationInput = promptFor('Please enter the persons occupation',autoValid);
-  let listOfOccupations =[]
-  let foundOccupation = people.filter(function(potentialTraitMatch){
-    if(potentialTraitMatch.occupation === userOccupationInput){
+function searchByGender(people){
+  let gender = promptFor("If you know the person's gender, enter it below.", autoValid);
+  let foundPerson;
+
+  let foundGender = people.filter(function(potentialMatch) {
+    if(potentialMatch.gender === gender){
       return true;
     }
     else{
       return false;
     }
   })
-  for(let i = 0; i < foundOccupation.length; i++){
-      listOfOccupations.push(' ' + foundOccupation[i].firstName + ' ' + foundOccupation[i].lastName)
-  }
-  alert(`${listOfOccupations} are ${userOccupationInput}s`,autoValid);
-    return foundOccupation;
+  foundPerson = customValidation(foundGender);
+  return foundPerson;
 }
 
-function heightSearch(people){
-  let userHeightInput = promptFor('Please enter the persons height in inches',autoValid);
-  let listOfHeights = []
-  let foundHeight = people.filter(function(potentialTraitMatch){
-    if(potentialTraitMatch.height == userHeightInput){
+function searchByOccupation(people){
+  let occupation = promptFor("If you know the person's occupation, enter it below.", autoValid);
+  let foundPerson;
+
+  let foundOccupation = people.filter(function(potentialMatch) {
+    if(potentialMatch.occupation === occupation){
       return true;
     }
     else{
       return false;
     }
   })
-  for(let i = 0; i < foundHeight.length; i ++){
-    listOfHeights.push('' + foundHeight[i].firstName + '' + foundHeight[i].lastName)
-  }
-  alert('${listOfHeights} are ${userHeightInput} inches tall',autoValid);
-    return foundHeight;
+  foundPerson = customValidation(foundOccupation);
+  return foundPerson;
+}
+function searchByHeight(people){
+  let height = promptFor("If you know the person's height, enter it below.", autoValid);
+  let foundPerson;
+
+  let foundHeight = people.filter(function(potentialMatch){
+    if(potentialMatch.height == parseInt(height)){
+        return true;
+    }
+    else{
+      return false;
+    }
+  })
+  foundPerson = customValidation(foundHeight);
+  return foundPerson;
 }
 
+function searchByWeight(people){
+  let weight = promptFor("If you know the person's weight, enter it below.", autoValid);
+  let foundPerson;
 
-function weightSearch(people){
-  let userWeightInput = promptFor('Please enter the persons weight', autoValid);
-  let listOfWeight = []
-  let foundWeight = people.filter(function(potentialTraitMatch){
-    if(potentialTraitMatch.weight == userWeightInput){
+  let foundWeight = people.filter(function(potentialMatch){
+    if(potentialMatch.weight === parseInt(weight)){
       return true;
     }
     else{
       return false;
     }
   })
-  for(let i = 0; i < foundWeight.length; i++){
-    listOfWeight.push('' + foundWeight[i].firstName + '' + foundWeight[i].lastName)
-  }
-  alert(`${listOfWeight} are ${userWeightInput} pounds`,autoValid);
-    return foundWeight;
+  foundPerson = customValidation(foundWeight);
+  return foundPerson;
 }
 
-function dobSearch(people){
-  let userDobInput = promptFor('Please enter the persons date of birth using M/DD/YYYY format (Dont put a zero if it is a single digit month',autoValid);
-  let listOfDob =[]
-  let foundDob = people.filter(function(potentialTraitMatch){
-    if(potentialTraitMatch.dob == userDobInput){
+function searchByDOB(people){
+  let dob = promptFor("If you know the person's DOB, enter it below.", autoValid);
+  let foundPerson;
+
+  let foundDOB = people.filter(function(potentialMatch){
+    if(potentialMatch.dob === dob){
       return true;
     }
     else{
       return false;
     }
   })
-  for(let i = 0; i <foundDob.length; i++){
-    listOfDob.push('' + foundDob[i].firstName + '' + foundDob[i].lastName)
-  }
-  alert('${listOfDob} have the date of birth of ${userDobInput}.',autoValid)
+  foundPerson = customValidation(foundDOB);
+  return foundPerson;
 }
+
+function searchByID(people){
+  let id = promptFor("If you know the person's ID, enter it below.", autoValid);
+  let personFound;
+
+  let foundID = people.filter(function(potentialMatch) {
+    if(potentialMatch.id === parseInt(id)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  personFound = customValidation(foundID);
+  return personFound;
+}
+
 //TODO: add other trait filter functions here.
 //adding in multi critea search
-function searchbyMultipleTraits(people){
-  let listOfTraits = people;
-  let userTrue = false;
-  let finalResult = [];
-  while(userTrue === false){
-    let userTraitInput = parseInt(promptFor('Please enter another trait to search by; Type "1" for eye color, "2" for gender search, "3" occupation, "4" Height search, "5" for weight, or "6" for dob search, if youre search is complete type "7"', autoValid));
-    if(userTraitInput === 1){
-      listOfTraits = searchByEyeColor(listOfTraits)}
-    if(userTraitInput === 2){
-      listOfTraits = genderSearch(listOfTraits);}
-    if(userTraitInput === 3){
-      listOfTraits = occupationSearch(listOfTraits);}
-    if(userTraitInput === 4){
-      listOfTraits = heightSearch(listOfTraits);}
-    if(userTraitInput === 5){
-      listOfTraits = weightSearch(listOfTraits);}
-    if(userTraitInput === 6){
-      listOfTraits = dobSearch(listOfTraits);}
-    if (userTraitInput === 7){
-      userTrue = true;}
-    }
-  
-  if (finalResult.length = 0){
-    alert ('No one was fuond given your current search. Please try another search')
-    searchbyMultipleTraits(people)
+function searchByTraits(people){
+  let searchType = promptFor("What trait  would you like to search by? Enter: 'eye color', 'DOB', 'gender', 'weight', 'height', 'ID' or 'occupation'", autoValid);
+  let searchResults;
+  switch(searchType){
+    case 'eye color':
+      searchResults = searchByEyeColor(people);
+      break;
+    case 'DOB':
+      searchResults = searchByDOB(people);
+      break;
+    case 'gender':
+      searchResults = searchByGender(people);
+      break;
+    case 'weight':
+      searchResults = searchByWeight(people);
+      break;
+    case 'height':
+      searchResults = searchByHeight(people);
+      break;
+    case 'occupation':
+      searchResults = searchByOccupation(people);
+      break;
+    case 'ID':
+      searchResults = searchByID(people);
+      break;
+    default:
+      app(people);
+      break;
   }
-  for (let i = 0; i < listOfTraits.length; i++){
-    finalResult.push('' + listOfTraits[i].firstName + '' + listOfTraits[i].lastName)
-  }
-  let foundPersons = promptFor(`Your search have resulted in ${finalResult}. Type the first name of the person you would like to search.`, autoValid);
-  foundPersons = foundPersons.charAt(0).toUpperCase() + foundPersons.slice(1);
-  let firstPerson = listOfTraits.filter(function(potentialTraitMatch){
-    if(potentialTraitMatch.firstName === foundPersons){
-      return true;
-    }
-    else{
-      return false;}
-    })
-    
-  }
+
+  mainMenu(searchResults, people);
+}
 
 
 
@@ -454,10 +452,20 @@ function autoValid(input){
   return true; 
 }
 
-function customValidation(input, people){
-  if (input !== people.eyeColor || input !== people.gender || input !== people.weight || input !== people.height || input !== people.dob || input !== people.occupation){
-    return false
+function customValidation(input){
+  let foundPerson;
+  let answer;
+  for(let i = 0; i < input.length; i++){
+    answer = promptFor("Is " + input[i].firstName + " " + input[i].lastName + " the person you are looking for? Type 'yes' or 'no' below.", yesNo);
+    if(answer == "yes"){
+      foundPerson = input[i];
+      break;
+    }else{
+      foundPerson;
+    }
   }
+  return foundPerson;
 }
+
 
 //#endregion
