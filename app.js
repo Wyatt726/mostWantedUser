@@ -379,7 +379,6 @@ function searchbyMultipleTraits(people){
 
 
 
-
 //#endregion
 
 //Display functions.
