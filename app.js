@@ -35,7 +35,7 @@ function mainMenu(person, people){
     alert("Could not find that individual.");
     return app(people); // restart
   }
-
+  
   let displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
 
   switch(displayOption){
@@ -107,7 +107,7 @@ function findDecendants(person,people){
     listOfKids.push(' ' + foundDecendant[i].firstName + ' ' + foundDecendant[i].lastName)
   }
   if(listOfKids.length === 0){
-    alert('There was no descendants found for your person')
+    alert('There was no descendants found for this individual')
     mainMenu(person,people);
   }
     else{
@@ -211,7 +211,7 @@ function findSiblings (people, foundParents, orignalPerson) {
 }
   
   if (listOfSiblings.length === 0) {
-    alert('There was no siblings found for your person')
+    alert('There were no siblings found for this individual')
     return findSpouse(orignalPerson, people)
   } 
     else {
@@ -241,7 +241,7 @@ function findSpouse (person, people) {
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people){
-  let eyeColor = promptFor("What is the person's eye color?", autoValid);
+  let eyeColor = promptFor("What is the individuals eye color?", autoValid);
   let foundPerson;
 
   let foundEyeColor = people.filter(function(potentialMatch) {
@@ -256,7 +256,7 @@ function searchByEyeColor(people){
   return foundPerson;
 }
 function searchByGender(people){
-  let gender = promptFor("If you know the person's gender, enter it below.", autoValid);
+  let gender = promptFor("Please enter the individuals gender below", autoValid);
   let foundPerson;
 
   let foundGender = people.filter(function(potentialMatch) {
@@ -272,7 +272,7 @@ function searchByGender(people){
 }
 
 function searchByOccupation(people){
-  let occupation = promptFor("If you know the person's occupation, enter it below.", autoValid);
+  let occupation = promptFor("Please enter the individuals occupation below", autoValid);
   let foundPerson;
 
   let foundOccupation = people.filter(function(potentialMatch) {
@@ -287,7 +287,7 @@ function searchByOccupation(people){
   return foundPerson;
 }
 function searchByHeight(people){
-  let height = promptFor("If you know the person's height, enter it below.", autoValid);
+  let height = promptFor("If you know this person's height, please enter it below.", autoValid);
   let foundPerson;
 
   let foundHeight = people.filter(function(potentialMatch){
@@ -303,7 +303,7 @@ function searchByHeight(people){
 }
 
 function searchByWeight(people){
-  let weight = promptFor("If you know the person's weight, enter it below.", autoValid);
+  let weight = promptFor("If you know the person's weight, please enter it below.", autoValid);
   let foundPerson;
 
   let foundWeight = people.filter(function(potentialMatch){
@@ -319,7 +319,7 @@ function searchByWeight(people){
 }
 
 function searchByDOB(people){
-  let dob = promptFor("If you know the person's DOB, enter it below.", autoValid);
+  let dob = promptFor("If you know the person's date of birth (DOB), please enter it below in DD/MM/YYYY format.", autoValid);
   let foundPerson;
 
   let foundDOB = people.filter(function(potentialMatch){
@@ -335,7 +335,7 @@ function searchByDOB(people){
 }
 
 function searchByID(people){
-  let id = promptFor("If you know the person's ID, enter it below.", autoValid);
+  let id = promptFor("If you know the person's ID, please enter it below.", autoValid);
   let personFound;
 
   let foundID = people.filter(function(potentialMatch) {
@@ -353,7 +353,7 @@ function searchByID(people){
 //TODO: add other trait filter functions here.
 //adding in multi critea search
 function searchByTraits(people){
-  let searchType = promptFor("What trait  would you like to search by? Enter: 'eye color', 'DOB', 'gender', 'weight', 'height', 'ID' or 'occupation'", autoValid);
+  let searchType = promptFor("What trait would you like to search by? Enter: 'eye color', 'DOB', 'gender', 'weight', 'height', 'ID' or 'occupation'", autoValid);
   let searchResults;
   switch(searchType){
     case 'eye color':
@@ -431,7 +431,7 @@ function displayPerson(person, people){
 function promptFor(question, valid){
   let response;
   let isValid;
-  do{
+  do{ 
     response = prompt(question).trim();
     isValid = valid(response);
   } 
